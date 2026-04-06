@@ -1,0 +1,36 @@
+.card {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    /* padding: 0 30px 30px 30px; */
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+
+    border-radius: 35px;
+    background: #5562D8;
+}
+
+.card .card-title {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+
+    background: #FF4F6E;
+
+    color: #F3F7FF;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+.card-content {
+    width: 100%;
+    padding: 30px 35px;
+}

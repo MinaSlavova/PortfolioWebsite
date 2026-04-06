@@ -1,0 +1,86 @@
+.about-me-display {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+
+    text-align: justify;
+
+    max-width: fit-content;
+    margin: 0 auto;
+}
+
+.about-me-display .about-me-leftSide {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    flex-shrink: 0;
+}
+
+.about-me-display .about-me-leftSide .about-me-image {
+    width: 270px;
+    height: 270px;
+    object-fit: cover;
+
+    border-radius: 42px;
+    border: 7px solid #F3F7FF;
+    display: block;
+}
+
+.about-me-display .about-me-leftSide .about-me-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.about-me-display .about-me-leftSide .about-me-links .about-me-link-button {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 17px;
+    background: #F3F7FF;
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.about-me-display .about-me-leftSide .about-me-links .about-me-link-button:hover {
+    filter: brightness(0.9);
+}
+
+.about-me-display .about-me-leftSide .about-me-links .icon {
+    width: 30px;
+    height: auto;
+    aspect-ratio: 1/1;
+
+    fill: #5562D8;
+}
+
+.about-me-display .about-me-divider {
+    width: 4px;
+    align-self: stretch;
+    background: #F3F7FF;
+    border-radius: 999px;
+    flex-shrink: 0;
+}
+
+.about-me-display .about-me-rightSide {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    max-width: 550px;
+}
+
+.about-me-display .about-me-rightSide .about-me-text {
+    color: #F3F7FF;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    flex: 1;
+    line-height: normal;
+}

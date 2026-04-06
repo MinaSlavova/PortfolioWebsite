@@ -1,0 +1,198 @@
+.project-display {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 15px 10px;
+    justify-content: center;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.project-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 30px;
+}
+
+.project-card h3 {
+    display: flex;
+    padding: 7px 100px;
+    margin: 0px;
+    width: fit-content;
+    max-width: 100%;
+    align-items: center;
+
+    border-radius: 30px;
+    background: #FF4F6E;
+
+    color: #F3F7FF;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.project-card.reverse h3 {
+  align-self: flex-end;
+}
+
+.project-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    padding: 20px 30px;
+    border-radius: 30px;
+    background: #FFF1F1;
+
+    /* Changes */
+    text-align: justify;
+}
+
+.project-card.reverse .project-content {
+  flex-direction: row-reverse;
+}
+
+.project-content .project-content-leftSide {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.project-card.reverse .project-content-leftSide {
+  flex-direction: row-reverse;
+}
+
+.project-content .project-content-leftSide .project-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.project-content .project-content-leftSide .project-links .project-link-button {
+    display: flex;
+    width: 70px;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 25px;
+    background: #FF4F6E;
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.project-content .project-content-leftSide .project-links .project-link-button:hover {
+    filter: brightness(0.9);
+}
+
+.project-content .project-content-leftSide .project-links .icon {
+    width: 48px;
+    height: auto;
+    aspect-ratio: 1/1;
+
+    fill: #FFF1F1;
+}
+
+.project-content .project-content-leftSide .project-image {
+    width: 270px;
+    height: 270px;
+    object-fit: cover;
+
+    border-radius: 42px;
+    border: 7px solid #FF4F6E;
+    display: block;
+}
+
+.project-content .project-content-divider {
+    width: 4px;
+    align-self: stretch;
+    background: #FF4F6E;
+    border-radius: 999px;
+}
+
+.project-content .project-content-rightSide {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+
+    max-width: fit-content;
+    margin: 0 auto 0 0;
+}
+
+.project-card.reverse .project-content-rightSide {
+  align-items: flex-end;
+  text-align: right;
+  margin: 0 0 0 auto;
+}
+
+.project-content .project-content-rightSide .project-description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.project-card.reverse .project-content .project-content-rightSide .project-description {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.project-card h4 {
+    margin: 0px;
+    color: #5562D8;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.project-card p {
+    color: #737373;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.project-content .project-content-rightSide .project-technologies{
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 10px 5px;
+    align-self: stretch;
+    flex-wrap: wrap;
+}
+
+.project-card.reverse .project-technologies {
+    justify-content: flex-end;
+}
+
+.project-content .project-content-rightSide .project-technology {
+    display: flex;
+    padding: 2.5px 25px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    border-radius: 15px;
+    background: #FF4F6E;
+
+    color: #FFF1F1;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}

@@ -16,7 +16,7 @@
 
 .contact-form-group label {
     color: #F3F7FF;
-    font-family: Poppins;
+    font-family: Poppins, sans-serif;
     font-size: 16px;
     font-weight: 600;
 }
@@ -28,19 +28,21 @@
     border: 3px solid #FF4F6E;
     border-radius: 20px;
     background: #FFF1F1;
-    font-family: Poppins;
+    font-family: Poppins, sans-serif;
     font-size: 16px;
     box-sizing: border-box;
+    outline: none;
+}
+
+.contact-form-group input:focus,
+.contact-form-group textarea:focus {
+    filter: brightness(0.98);
 }
 
 .contact-form-group textarea {
     min-height: 140px;
+    resize: vertical;
 }
-
-/* .contact-form-group input:focus,
-.contact-form-group textarea:focus {
-    filter: brightness(0.95);
-} */
 
 .contact-form-button {
     align-self: center;
@@ -49,7 +51,7 @@
     border-radius: 20px;
     background: #FF4F6E;
     color: #FFF1F1;
-    font-family: Poppins;
+    font-family: Poppins, sans-serif;
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
@@ -58,4 +60,102 @@
 
 .contact-form-button:hover {
     filter: brightness(0.95);
+}
+
+/* Overlay (darkens background slightly) */
+.contact-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(4px);
+
+    z-index: 9999;
+}
+
+/* Alert box */
+.contact-alert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    padding: 32px 40px;
+    border-radius: 28px;
+
+    min-width: 320px;
+    max-width: 420px;
+
+    text-align: center;
+    font-family: Poppins, sans-serif;
+
+    animation: contactAlertPop 0.25s ease;
+}
+
+/* Success */
+.contact-alert.success {
+    background: #dff6dd;
+    color: #1f5c2e;
+    border: 4px solid #62c370;
+}
+
+/* Error */
+.contact-alert.error {
+    background: #ffe1e6;
+    color: #8f1d35;
+    border: 4px solid #ff4f6e;
+}
+
+/* Message */
+.contact-alert-message {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Button */
+.contact-alert-close {
+    padding: 10px 22px;
+    border-radius: 16px;
+    border: none;
+
+    font-family: Poppins, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+/* Button colors */
+.contact-alert.success .contact-alert-close {
+    background: #62c370;
+    color: white;
+}
+
+.contact-alert.error .contact-alert-close {
+    background: #ff4f6e;
+    color: white;
+}
+
+.contact-alert-close:hover {
+    filter: brightness(0.95);
+}
+
+/* Animation */
+@keyframes contactAlertPop {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

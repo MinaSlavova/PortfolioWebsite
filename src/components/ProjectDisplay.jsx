@@ -1,4 +1,5 @@
 import React from "react";
+import ProjectCarousel from "./ProjectCarousel";
 import { ReactComponent as GitIcon } from '../icons/git-icon-svg.svg';
 import { ReactComponent as ItchIcon } from '../icons/itch-io-svg.svg';
 import "./ProjectDisplay.css";
@@ -25,7 +26,12 @@ function ProjectDisplay({ projects }) {
                                 )}
                             </div>
                             {/* TODO: Add option for video and switching images */}
-                            <img src={project.image} alt={project.title} className="project-image" />
+                            {/* <img src={project.image} alt={project.title} className="project-image" /> */}
+                            <ProjectCarousel
+                                images={project.images}
+                                alt={project.title}
+                                thumbsSide={index % 2 === 1 ? "left" : "right"}
+                            />
                         </div>
 
                         <div className="project-content-divider"></div>

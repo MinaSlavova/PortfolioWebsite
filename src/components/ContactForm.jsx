@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import emailjs from '@emailjs/browser';
-import './ContactForm.css';
+import React, { useState, useRef, useEffect } from "react";
+import emailjs from "@emailjs/browser";
+import "./ContactForm.css";
 
 function ContactForm() {
     const [formData, setFormData] = useState({
@@ -8,6 +8,42 @@ function ContactForm() {
         email: "",
         message: ""
     });
+
+    const [alert, setAlert] = useState({
+        message: "",
+        type: "", // "success" | "error"
+        visible: false
+    });
+
+    const timeoutRef = useRef(null);
+
+    const showAlert = (message, type) => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+
+        setAlert({
+            message,
+            type,
+            visible: true
+        });
+
+        timeoutRef.current = setTimeout(() => {
+            setAlert({
+                message: "",
+                type: "",
+                visible: false
+            });
+        }, 3000);
+    };
+
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, []);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -32,7 +68,7 @@ function ContactForm() {
             process.env.REACT_APP_EMAILJS_PUBLIC_KEY
         )
         .then(() => {
-            alert("Message sent successfully!");
+            showAlert("Message sent successfully!", "success");
 
             setFormData({
                 name: "",
@@ -42,55 +78,87 @@ function ContactForm() {
         })
         .catch((error) => {
             console.error("FAILED...", error);
-            alert("Something went wrong. Try again.");
+            showAlert("Something went wrong. Try again.", "error");
+        });
+    };
+
+    const closeAlert = () => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+
+        setAlert({
+            message: "",
+            type: "",
+            visible: false
         });
     };
 
     return (
-        <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="contact-form-group">
-                <label htmlFor="name">Name</label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your name"
-                    required
-                />
-            </div>
+        <>
+            {alert.visible && (
+                <div className="contact-alert-overlay">
+                    <div className={`contact-alert ${alert.type}`}>
+                        <span className="contact-alert-message">
+                            {alert.message}
+                        </span>
 
-            <div className="contact-form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Your email"
-                    required
-                />
-            </div>
+                        <button
+                            type="button"
+                            className="contact-alert-close"
+                            onClick={closeAlert}
+                        >
+                            Got it
+                        </button>
+                    </div>
+                </div>
+            )}
 
-            <div className="contact-form-group">
-                <label htmlFor="message">Message</label>
-                <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Write your message here..."
-                    rows="6"
-                    required
-                />
-            </div>
+            <form className="contact-form" onSubmit={handleSubmit}>
+                <div className="contact-form-group">
+                    <label htmlFor="name">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Your name"
+                        required
+                    />
+                </div>
 
-            <button type="submit" className="contact-form-button">
-                Send Message
-            </button>
-        </form>
+                <div className="contact-form-group">
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Your email"
+                        required
+                    />
+                </div>
+
+                <div className="contact-form-group">
+                    <label htmlFor="message">Message</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Write your message here..."
+                        rows="6"
+                        required
+                    />
+                </div>
+
+                <button type="submit" className="contact-form-button">
+                    Send Message
+                </button>
+            </form>
+        </>
     );
 }
 

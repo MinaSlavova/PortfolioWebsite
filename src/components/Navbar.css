@@ -10,6 +10,8 @@
 
     background: linear-gradient(90deg, rgba(85, 98, 216, 0.36) 0%, rgba(45, 52, 114, 0.00) 100%);
     backdrop-filter: blur(10px);
+
+    z-index: 100;
 }
 
 .navbar .navbar-logo {

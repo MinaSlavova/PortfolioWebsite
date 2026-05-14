@@ -6,7 +6,7 @@
     text-align: justify;
 
     max-width: fit-content;
-    margin: 0 auto;
+    margin: 15px auto;
 }
 
 .about-me-display .about-me-leftSide {
@@ -78,7 +78,7 @@
 .about-me-display .about-me-rightSide .about-me-text {
     color: #F3F7FF;
     font-family: Poppins;
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     flex: 1;

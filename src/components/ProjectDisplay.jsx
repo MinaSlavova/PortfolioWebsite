@@ -2,6 +2,7 @@ import React from "react";
 import ProjectCarousel from "./ProjectCarousel";
 import { ReactComponent as GitIcon } from '../icons/git-icon-svg.svg';
 import { ReactComponent as ItchIcon } from '../icons/itch-io-svg.svg';
+import { ReactComponent as InfoIcon } from '../icons/info-icon-svg.svg';
 import "./ProjectDisplay.css";
 
 function ProjectDisplay({ projects }) {
@@ -22,6 +23,11 @@ function ProjectDisplay({ projects }) {
                                 {project.itch && (
                                     <a href={project.itch} target="_blank" rel="noopener noreferrer" className="project-link-button">
                                         <ItchIcon className="icon" />
+                                    </a>
+                                )}
+                                {project.info && (
+                                    <a href={project.info} target="_blank" rel="noopener noreferrer" className="project-link-button">
+                                        <InfoIcon className="icon" />
                                     </a>
                                 )}
                             </div>

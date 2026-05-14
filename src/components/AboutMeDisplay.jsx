@@ -12,7 +12,7 @@ function AboutMeDisplay({ profile }) {
             <div className="about-me-leftSide">
                 <div className="about-me-links">
                     {profile.mail && (
-                        <a href={`mailto:${profile.mail}`} target="_blank" rel="noopener noreferrer" className="about-me-link-button">
+                        <a href={profile.mail.href} className="about-me-link-button">
                             <MailIcon className="icon" />
                         </a>
                     )}

@@ -1,20 +1,34 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 import "./ProjectCarousel.css";
 
 function ProjectCarousel({
-  images = [],
+  media = [],
   alt = "Project image",
   thumbsSide = "right"
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const thumbRefs = useRef([]);
+  const thumbsContainerRef = useRef(null);
 
-  const [mainEmblaRef, mainEmblaApi] = useEmblaCarousel({
-    loop: false,
-    align: "start"
-  });
+  const autoplay = useRef(
+    Autoplay({
+      delay: 4000,
+      jump: true,
+      playOnInit: true,
+      stopOnInteraction: false,
+    })
+  );
+
+  const [mainEmblaRef, mainEmblaApi] = useEmblaCarousel(
+    {
+      loop: false,
+      align: "start",
+    },
+    [autoplay.current]
+  );
 
   const onThumbClick = useCallback(
     (index) => {
@@ -31,10 +45,15 @@ function ProjectCarousel({
     setSelectedIndex(index);
 
     const selectedThumb = thumbRefs.current[index];
-    if (selectedThumb) {
-      selectedThumb.scrollIntoView({
+    const thumbsContainer = thumbsContainerRef.current;
+
+    if (selectedThumb && thumbsContainer) {
+      thumbsContainer.scrollTo({
+        top:
+          selectedThumb.offsetTop -
+          thumbsContainer.clientHeight / 2 +
+          selectedThumb.offsetHeight / 2,
         behavior: "smooth",
-        block: "nearest"
       });
     }
   }, [mainEmblaApi]);
@@ -75,14 +94,27 @@ function ProjectCarousel({
     };
   }, [isFullscreen]);
 
-  if (!images.length) return null;
+  useEffect(() => {
+    if (!mainEmblaApi) return;
+
+    const autoplay = mainEmblaApi.plugins().autoplay;
+    if (!autoplay) return;
+
+    if (isFullscreen) {
+      autoplay.stop();
+    }
+  }, [isFullscreen, mainEmblaApi]);
+
+  if (!media.length) return null;
+
+  
 
   return (
     <>
       <div className={`project-carousel project-carousel--thumbs-${thumbsSide}`}>
         <div className="project-carousel__main" ref={mainEmblaRef}>
           <div className="project-carousel__main-container">
-            {images.map((image, index) => (
+            {/* {images.map((image, index) => (
               <div className="project-carousel__main-slide" key={index}>
                 <img
                   src={image}
@@ -91,13 +123,32 @@ function ProjectCarousel({
                   onClick={() => setIsFullscreen(true)}
                 />
               </div>
+            ))} */}
+            {media.map((item, index) => (
+              <div className="project-carousel__main-slide" key={index}>
+                {item.type === "image" ? (
+                  <img
+                    src={item.src}
+                    alt={item.alt || `${alt} ${index + 1}`}
+                    className="project-carousel__main-image"
+                    onClick={() => setIsFullscreen(true)}
+                  />
+                ) : (
+                  <video
+                    src={item.src}
+                    className="project-carousel__main-video"
+                    controls
+                    onClick={() => setIsFullscreen(true)}
+                  />
+                )}
+              </div>
             ))}
           </div>
         </div>
 
-        <div className="project-carousel__thumbs">
+        <div className="project-carousel__thumbs" ref={thumbsContainerRef}>
           <div className="project-carousel__thumbs-container">
-            {images.map((image, index) => (
+            {media.map((item, index) => (
               <button
                 key={index}
                 ref={(el) => {
@@ -112,11 +163,24 @@ function ProjectCarousel({
                 }`}
                 aria-label={`Show image ${index + 1}`}
               >
-                <img
-                  src={image}
-                  alt={`${alt} thumbnail ${index + 1}`}
-                  className="project-carousel__thumb-image"
-                />
+                {item.type === "image" ? (
+                  <img
+                    src={item.src}
+                    alt={`${alt} thumbnail ${index + 1}`}
+                    className="project-carousel__thumb-image"
+                  />
+                ) : (
+                  <div className="project-carousel__video-thumb">
+                    <video
+                      src={item.src}
+                      className="project-carousel__thumb-video"
+                      muted
+                      playsInline
+                      preload="metadata"
+                    />
+                    <span className="project-carousel__video-play-icon">▶</span>
+                  </div>
+                )}
               </button>
             ))}
           </div>
@@ -130,12 +194,22 @@ function ProjectCarousel({
         onClick={() => setIsFullscreen(false)}
         aria-hidden={!isFullscreen}
       >
-        <img
-          src={images[selectedIndex]}
-          alt="Fullscreen"
-          className="carousel-fullscreen__image"
-          onClick={(e) => e.stopPropagation()}
-        />
+        {media[selectedIndex]?.type === "image" ? (
+          <img
+            src={media[selectedIndex].src}
+            alt="Fullscreen"
+            className="carousel-fullscreen__image"
+            onClick={(e) => e.stopPropagation()}
+          />
+        ) : (
+          <video
+            src={media[selectedIndex]?.src}
+            className="carousel-fullscreen__image"
+            controls
+            autoPlay
+            onClick={(e) => e.stopPropagation()}
+          />
+        )}
 
         <button
           className="carousel-fullscreen__close"

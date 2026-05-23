@@ -34,7 +34,7 @@ function ProjectDisplay({ projects }) {
                             {/* TODO: Add option for video and switching images */}
                             {/* <img src={project.image} alt={project.title} className="project-image" /> */}
                             <ProjectCarousel
-                                images={project.images}
+                                media={project.media}
                                 alt={project.title}
                                 thumbsSide={index % 2 === 1 ? "left" : "right"}
                             />

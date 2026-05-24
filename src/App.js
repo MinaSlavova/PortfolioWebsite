@@ -23,7 +23,7 @@ function App() {
         "TUES-team-PR.png",
         "HackTUES-comic-Egypt.png",
         "HackTUES-comic-JP.png",
-        "HackTUES-cookie.jpg",
+        "HackTUES-cookie.JPG",
       ].map((name) => ({
         type: "image",
         src: imagePath("HackTUES", name),

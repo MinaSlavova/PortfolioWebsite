@@ -12,15 +12,30 @@ function ProjectCarousel({
   const [isFullscreen, setIsFullscreen] = useState(false);
   const thumbRefs = useRef([]);
   const thumbsContainerRef = useRef(null);
+  const isFullscreenRef = useRef(false);
 
   const autoplay = useRef(
     Autoplay({
       delay: 4000,
       jump: true,
-      playOnInit: true,
-      stopOnInteraction: false,
+      playOnInit: false,
     })
   );
+  
+  const stopAutoplay = useCallback(() => {
+    autoplay.current?.stop();
+  }, []);
+
+  const startAutoplay = useCallback(() => {
+    requestAnimationFrame(() => {
+      autoplay.current?.play();
+    });
+  }, []);
+
+  const openFullscreen = useCallback(() => {
+    stopAutoplay();
+    setIsFullscreen(true);
+  }, [stopAutoplay]);
 
   const [mainEmblaRef, mainEmblaApi] = useEmblaCarousel(
     {
@@ -61,15 +76,32 @@ function ProjectCarousel({
   useEffect(() => {
     if (!mainEmblaApi) return;
 
+    const handleSelect = () => {
+      onSelect();
+
+      if (isFullscreenRef.current) {
+        stopAutoplay();
+      }
+    };
+
+    const handleReInit = () => {
+      onSelect();
+
+      if (isFullscreenRef.current) {
+        stopAutoplay();
+      }
+    };
+
     onSelect();
-    mainEmblaApi.on("select", onSelect);
-    mainEmblaApi.on("reInit", onSelect);
+
+    mainEmblaApi.on("select", handleSelect);
+    mainEmblaApi.on("reInit", handleReInit);
 
     return () => {
-      mainEmblaApi.off("select", onSelect);
-      mainEmblaApi.off("reInit", onSelect);
+      mainEmblaApi.off("select", handleSelect);
+      mainEmblaApi.off("reInit", handleReInit);
     };
-  }, [mainEmblaApi, onSelect]);
+  }, [mainEmblaApi, onSelect, stopAutoplay]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -81,6 +113,10 @@ function ProjectCarousel({
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
+
+  useEffect(() => {
+    isFullscreenRef.current = isFullscreen;
+  }, [isFullscreen]);
 
   useEffect(() => {
     if (isFullscreen) {
@@ -95,19 +131,14 @@ function ProjectCarousel({
   }, [isFullscreen]);
 
   useEffect(() => {
-    if (!mainEmblaApi) return;
-
-    const autoplay = mainEmblaApi.plugins().autoplay;
-    if (!autoplay) return;
-
     if (isFullscreen) {
-      autoplay.stop();
+      stopAutoplay();
+    } else {
+      startAutoplay();
     }
-  }, [isFullscreen, mainEmblaApi]);
+  }, [isFullscreen, stopAutoplay, startAutoplay]);
 
   if (!media.length) return null;
-
-  
 
   return (
     <>
@@ -131,14 +162,15 @@ function ProjectCarousel({
                     src={item.src}
                     alt={item.alt || `${alt} ${index + 1}`}
                     className="project-carousel__main-image"
-                    onClick={() => setIsFullscreen(true)}
+                    onClick={openFullscreen}
                   />
                 ) : (
                   <video
                     src={item.src}
                     className="project-carousel__main-video"
                     controls
-                    onClick={() => setIsFullscreen(true)}
+                    muted
+                    onClick={openFullscreen}
                   />
                 )}
               </div>
@@ -187,12 +219,10 @@ function ProjectCarousel({
         </div>
       </div>
 
+      {isFullscreen && (
       <div
-        className={`carousel-fullscreen ${
-          isFullscreen ? "carousel-fullscreen--open" : ""
-        }`}
+        className="carousel-fullscreen carousel-fullscreen--open"
         onClick={() => setIsFullscreen(false)}
-        aria-hidden={!isFullscreen}
       >
         {media[selectedIndex]?.type === "image" ? (
           <img
@@ -208,17 +238,29 @@ function ProjectCarousel({
             controls
             autoPlay
             onClick={(e) => e.stopPropagation()}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+              stopAutoplay();
+            }}
+            onPlay={stopAutoplay}
+            onPause={stopAutoplay}
+            onSeeking={stopAutoplay}
+            onVolumeChange={stopAutoplay}
           />
         )}
 
         <button
           className="carousel-fullscreen__close"
-          onClick={() => setIsFullscreen(false)}
-          aria-label="Close fullscreen image"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsFullscreen(false);
+          }}
+          aria-label="Close fullscreen media"
         >
           ✕
         </button>
       </div>
+    )}
     </>
   );
 }

@@ -72,13 +72,15 @@ function App() {
         ...[
           "GamePie-cards.png",
           "GamePie-cards-design-prototype.png",
+          "GamePie-board.jpg",
+          "GamePie-cards-pic.jpg",
         ].map((name) => ({
           type: "image",
           src: imagePath("GamePie", name),
         })),
       ],
       description:
-        "An introductory task for the Fontys Game Design semester. The goal was to create a board game based on a video game of our choice combined with a random board game genre. I worked in a group of 6 people, and contributed to the design of the game mechanics, the visual design and the creation of the physical prototype. I also worked on balancing the game and creating the playable characters and cards' abilities.",
+        "An introductory task for the Fontys Game Design semester. The goal was to create a board game based on a video game of our choice combined with a random board game genre. I worked in a group of 6 people, and contributed to the design of the game mechanics, the visual design and the creation of the physical prototype. I also worked on balancing the game and creating the playable characters and items' abilities.",
       technologies: ["Figma", "Krita"],
       git: null,
       itch: null,
@@ -132,7 +134,7 @@ function App() {
       description:
         "Splice-Born is a 2D roguelike hack and slash side scroller game I worked on as part of the Fontys Game Design semester as part of a duo. The game is inspired a lot by biopunk aesthetics and as a visual designer I tried to lean into that vibe alot when creating the main menu and the UI elements. I am also responsible for creating the playable character sprite alongside an attack animation which ended up not getting used. Other than that I worked on developing the playable character and the collectable items, and also on designing some of the rooms.",
       technologies: ["Aseprite", "Unity 6", "C#"],
-      git: "https://git.fhict.nl/I551612/semester3_duo_project",
+      git: "https://github.com/MinaSlavova/SpliceBorn/tree/Mika",
       itch: "https://m999kingmaik.itch.io/splice-born",
       info: null,
     },
@@ -140,10 +142,18 @@ function App() {
     {
       title: "Aether Flight",
       media: [
-        {
+        ...[
+          "Aether-poster.png",
+          "Aether-sticker.png",
+          "Aether-one-pager.png",
+          "Aether-concepts-1.png",
+          "Aether-concepts-2.png",
+          "Aether-tower-model.png",
+          "Aether-mood-board.png",
+        ].map((name) => ({
           type: "image",
-          src: "/images/GamePie_CardDesign_Ideas.png",
-        },
+          src: imagePath("AetherFlight", name),
+        })),
       ],
       description:
         "Aether Flight was a game I worked on alongside 5 other people as part of the Fontys Game Design semester. It was a project in which we had to work for an actual client. The goal was to create a VR flight simulator game serving as sort of a tech demo for a YAW VR chair. The idea was to create a short, but scenic experience, but sadly we didn't manage to get the game to a finished state. On my end, outside of helping with creating the narative, I worked on creating 3D models for the game. That was also my introduction to Blender. I helped in designing and building a large portion of the level, and also worked on concept art. Other than that I was tasked with creating a sticker design and poster for the game.",
@@ -167,7 +177,7 @@ function App() {
       description:
         "ReFocus is an Android application intended to help people strugglng with procrastination. The app is based on the Pomodoro method and is designed by me as a project for the Fontys Mobile Development semester. Due to time constraints and my own struggles with procrastination I couldn't completely finish the project, but I am quite proud of the design I made for it and also the amount of research.",
       technologies: ["Figma", "Android Studio", "Kotlin", "Jetpack Compose"],
-      git: "https://git.fhict.nl/I551612/semester4_personalproject1",
+      git: "https://github.com/MinaSlavova/ReFocus",
       itch: null,
       info: null,
     },

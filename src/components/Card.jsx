@@ -1,6 +1,6 @@
 import React from 'react';
 import './Card.css';
-import ProjectDisplay from './ProjectDisplay';
+import ProjectDisplay from './ProjectDisplay.jsx';
 
 function Card({ title, children}) {
   return (

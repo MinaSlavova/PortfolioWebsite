@@ -3,7 +3,7 @@ import './AboutMeDisplay.css';
 
 import { ReactComponent as MailIcon } from '../icons/email-svg.svg';
 import { ReactComponent as InstagramIcon } from '../icons/instagram-svg.svg';
-import { ReactComponent as WhatsappIcon } from '../icons/whatsapp-svg.svg';
+// import { ReactComponent as WhatsappIcon } from '../icons/whatsapp-svg.svg';
 import { ReactComponent as LinkedInIcon } from '../icons/linkedin-svg.svg';
 
 function AboutMeDisplay({ profile }) {
@@ -21,9 +21,9 @@ function AboutMeDisplay({ profile }) {
                             <InstagramIcon className="icon" />
                         </a>
                     )}
-                    {profile.whatsapp && (
-                        <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" className="about-me-link-button">
-                            <WhatsappIcon className="icon" />
+                    {profile.cv && (
+                        <a href={profile.cv} target="_blank" rel="noopener noreferrer" className="about-me-link-button">
+                            CV
                         </a>
                     )}
                     {profile.linkedin && (

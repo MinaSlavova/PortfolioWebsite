@@ -183,12 +183,12 @@ function App() {
     },
   ];
 
-  const mockProfile = {
+  const profile = {
   image: '/images/ProfilePicture.jpg',
   text: `Hello! My name is Mina and I am an aspiring game and visual designer hailing from Bulgraia. I am currently a student at Fontys University of Applied Sciences, studying ICT. I have a strong passion for creative fields and would love to try my hand at anything and everything as long as it offers room for me to express myself. In my free time I enjoy playing games, drawing and listening to odd music.`,
   mail: { label: 'Contact me', href: '#contact-me' },
   instagram: 'https://www.instagram.com/minaslavova/',
-  whatsapp: 'https://wa.me/qr/VWFRWDU2N4WJL1',
+  cv: '/documents/CV-Mina-Slavova.pdf',
   linkedin: 'https://www.linkedin.com/in/mina-slavova-808063287/',
 };
 
@@ -207,7 +207,7 @@ function App() {
           <section id="about-me">
             <Card title="Who am I?">
 
-              <AboutMeDisplay profile={mockProfile} />
+              <AboutMeDisplay profile={profile} />
 
             </Card>
           </section>
